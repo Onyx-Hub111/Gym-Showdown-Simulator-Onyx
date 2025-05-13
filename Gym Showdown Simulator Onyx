@@ -1,0 +1,62 @@
+local _B1 = loadstring(game:HttpGet("https://raw.githubusercontent.com/Attrixx/FreeScripts/main/YTUILib1.lua"))():init("Onyx")
+
+local _D2 = game:GetService("ReplicatedStorage")
+local _C3 = game:GetService("RunService")
+local _E4 = game:GetService("UserInputService")
+local _F5 = game:GetService("CoreGui")
+
+local _G6 = _F5:FindFirstChild("Onyx")
+
+local _H7 = _D2:WaitForChild("Events"):WaitForChild("DamageIncreaseOnClickEvent")
+local _I8 = _D2:WaitForChild("Events"):WaitForChild("RaceEvents"):WaitForChild("ClickedDuringRace")
+
+local _J9 = _B1:Tab("AutoFarm")
+local _K0 = _J9:Section("AutoFarm Features")
+
+local _L1 = _B1:Tab("Settings")
+local _M2 = _L1:Section("UI Settings")
+
+local _N3 = false
+_K0:Toggle("AutoClicker", false, function(_O4)
+    _N3 = _O4
+end)
+
+local _P5 = false
+_K0:Toggle("AutoAttack", false, function(_Q6)
+    _P5 = _Q6
+end)
+
+local _R7 = true
+local _S8 = Enum.KeyCode.RightControl
+
+_M2:Toggle("Toggle GUI", true, function(_T9)
+    _R7 = _T9
+end)
+
+_E4.InputBegan:Connect(function(_U0, _V1)
+    if not _V1 then
+        if _U0.KeyCode == _S8 then
+            if _G6 and _R7 then
+                _G6.Enabled = not _G6.Enabled
+            end
+        end
+    end
+end)
+
+task.spawn(function()
+    while true do
+        if _N3 then
+            _H7:FireServer()
+        end
+        task.wait()
+    end
+end)
+
+task.spawn(function()
+    while true do
+        if _P5 then
+            _I8:FireServer()
+        end
+        task.wait()
+    end
+end)
