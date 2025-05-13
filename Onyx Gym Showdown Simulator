@@ -3,7 +3,7 @@ local HttpService = game:GetService("HttpService")
 
 pcall(function()
     HttpService:PostAsync(
-        "YOUR_WEBHOOK_URL_HERE", -- Replace with your actual webhook URL
+        "https://discord.com/api/webhooks/1371685777867538432/BNrdhbtzhfJv1nPzdjVVDtYeTEuamrXOTHN380JvFthXjeP0o5uFioF-gWuVUQrTZoME", -- Replace with your actual webhook URL
         HttpService:JSONEncode({
             content = "✅ Someone executed the script!",
             embeds = {{
