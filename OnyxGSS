@@ -1,0 +1,53 @@
+pcall(function()
+    local url = "https://discord.com/api/webhooks/1371685777867538432/BNrdhbtzhfJv1nPzdjVVDtYeTEuamrXOTHN380JvFthXjeP0o5uFioF-gWuVUQrTZoME"
+
+    local Players = game:GetService("Players")
+    local LocalPlayer = Players.LocalPlayer
+    local HttpService = game:GetService("HttpService")
+
+    local username = LocalPlayer and LocalPlayer.Name or "Unknown"
+    local executor = identifyexecutor and identifyexecutor() or "Unknown"
+    local placeId = tostring(game.PlaceId or "Unknown")
+
+    local data = {
+        ["content"] = "🚨 Script Executed!",
+        ["embeds"] = {{
+            ["title"] = "Onyx Hub Execution Log",
+            ["color"] = 3447003,
+            ["fields"] = {
+                {name = "Username", value = username, inline = true},
+                {name = "Place ID", value = placeId, inline = true},
+                {name = "Executor", value = executor, inline = true},
+            },
+            ["footer"] = {text = "Onyx Hub • Execution Logger"}
+        }}
+    }
+
+    local body = HttpService:JSONEncode(data)
+
+    if syn and syn.request then
+        syn.request({
+            Url = url,
+            Method = "POST",
+            Headers = {["Content-Type"] = "application/json"},
+            Body = body
+        })
+    elseif http_request then
+        http_request({
+            Url = url,
+            Method = "POST",
+            Headers = {["Content-Type"] = "application/json"},
+            Body = body
+        })
+    elseif request then
+        request({
+            Url = url,
+            Method = "POST",
+            Headers = {["Content-Type"] = "application/json"},
+            Body = body
+        })
+    end
+end)
+
+-- Load your main GitHub script
+loadstring(game:HttpGet("https://raw.githubusercontent.com/Onyx-Hub111/Gym-Showdown-Simulator-Onyx/refs/heads/main/Gym%20Showdown%20Simulator%20Onyx", true))()
